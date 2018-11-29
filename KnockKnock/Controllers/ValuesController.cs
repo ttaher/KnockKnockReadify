@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Web.Http;
 
 namespace KnockKnock.Controllers
@@ -22,7 +21,7 @@ namespace KnockKnock.Controllers
             //{
             //string result = TokenCalc();
             //MemoryCache.Default.Add(new CacheItem(key, result), new CacheItemPolicy() { SlidingExpiration = TimeSpan.FromHours(6) });
-            return "26d91d08-63b7-4171-a74c-90d9f9b648d5"; 
+            return "26d91d08-63b7-4171-a74c-90d9f9b648d5";
             //}
         }
         [Route("Fibonacci")]
@@ -46,9 +45,9 @@ namespace KnockKnock.Controllers
         }
         public long FibonacciCalc(long n)
         {
+            long result = 0;
             try
             {
-
                 if (n == 0)
                     return 0;
                 if (n == -1 || n == 1 || n == 2)
@@ -57,14 +56,19 @@ namespace KnockKnock.Controllers
                     return -1;
                 double numerator = Math.Pow((1.0 + Math.Sqrt(5.0)), n) - Math.Pow((1.0 - Math.Sqrt(5.0)), n);
                 double denominator = Math.Pow(2.0, n) * Math.Sqrt(5.0);
-                double result = numerator / denominator;
-                double roundedResult = Math.Round(result);
-                return (long)roundedResult;
+                double tempresult = numerator / denominator;
+                double roundedResult = Math.Round(tempresult);
+                result = (long)roundedResult;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                throw;
             }
             catch (Exception)
             {
                 throw;
             }
+            return result;
         }
         public string TokenCalc()
         {
@@ -87,30 +91,42 @@ namespace KnockKnock.Controllers
         }
         public string TriangleTypeCalc(int a, int b, int c)
         {
-            if (!(a + b > c && b + c > a && a + c > b))
+            string result = "Error";
+            try
             {
-                return "Error";
+                if (a <= 0 || b <= 0 || c <= 0)
+                {
+                    result = "Error";
+                    return result;
+                }
+                if (!(a + b > c && b + c > a && a + c > b))
+                {
+                    result = "Error";
+                    return result;
+                }
+                if (a == b && b == c)
+                {
+                    result = "Equilateral";
+                    return result;
+                }
+                if (a == b || a == c || b == c)
+                {
+                    result = "Isosceles";
+                    return result;
+                }
+                if (a != b && b != c && c != a)
+                {
+                    result = "Scalene";
+                    return result;
+                }
             }
-            if (a <= 0 || b <= 0 || c <= 0)
+            catch
             {
-                return "Error";
+                throw;
             }
-            else if (a == b && b == c)
-            {
-                return "Equilateral";
-            }
-            else if (a == b || a == c || b == c)
-            {
-                return "Isosceles";
-            }
-            else if (a != b && b != c && c != a)
-            {
-                return "Scalene";
-            }
-            else
-            {
-                return "Error";
-            }
+
+
+            return result;
         }
 
         //#endregion

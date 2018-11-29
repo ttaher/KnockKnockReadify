@@ -30,7 +30,7 @@ namespace KnockKnock.Controllers.Tests
             Assert.AreEqual(12586269025, controller.Get(50));
             Assert.AreEqual(86267571272, controller.Get(54));
             Assert.AreEqual(139583862445, controller.Get(55));
-            //Assert.AreEqual("no content", controller.Get(1000));
+            
 
         }
         [TestMethod()]
