@@ -30,6 +30,7 @@ namespace KnockKnock.Controllers.Tests
             Assert.AreEqual(12586269025, controller.Get(50));
             Assert.AreEqual(86267571272, controller.Get(54));
             Assert.AreEqual(139583862445, controller.Get(55));
+            //Assert.AreEqual("no content", controller.Get(1000));
 
         }
         [TestMethod()]
@@ -46,15 +47,19 @@ namespace KnockKnock.Controllers.Tests
             Assert.AreEqual("", controller.Get(""));
             Assert.AreEqual("", controller.Get("  "));
             Assert.AreEqual("", controller.Get("\n"));
+            Assert.AreEqual("ALO", controller.Get("OLA"));
             Assert.AreEqual("rima rehat ahsab", controller.Get("amir taher basha"));
+            Assert.AreEqual("321 654 987", controller.Get("123 456 789"));
             Assert.AreEqual(" tI t'nseod deen ot noitnem edocinu", controller.Get(" It doesn't need to mention unicode"));
         }
         [TestMethod()]
         public void TriangleTypeCalcTest()
         {
             var controller = new ValuesController();
+            Assert.AreEqual("Error", controller.Get(1000, 100, 1));
             Assert.AreEqual("Equilateral", controller.Get(4, 4, 4));
             Assert.AreEqual("Scalene", controller.Get(5, 3, 6));
+            Assert.AreEqual("Error", controller.Get(0, 0, 0));
         }
     }
 }
