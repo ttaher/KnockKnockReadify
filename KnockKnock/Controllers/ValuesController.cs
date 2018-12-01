@@ -35,9 +35,7 @@ namespace KnockKnock.Controllers
             if (n == -2)
                 return -1;
             long result = await FibonacciCalc(n);
-
             return result;
-
         }
         [Route("TriangleType")]
         public string Get(int a, int b, int c)
@@ -48,19 +46,15 @@ namespace KnockKnock.Controllers
         [Route("ReverseWords")]
         public string Get(string sentence)
         {
-
             string result = ReverseWordsCalc(sentence);
             return result;
         }
+
+        #region code
         public Task<long> FibonacciCalc(long n)
         {
-            if (n >= 92 || n < -92)
-            {
-
-            }
             try
             {
-
                 double numerator = Math.Pow((1 + Math.Sqrt(5)), n) - Math.Pow((1 - Math.Sqrt(5)), n);
                 double denominator = Math.Pow(2.0, n) * Math.Sqrt(5.0);
                 double tempresult = numerator / denominator;
@@ -76,7 +70,6 @@ namespace KnockKnock.Controllers
             {
                 throw;
             }
-
         }
         public string TokenCalc()
         {
@@ -139,7 +132,7 @@ namespace KnockKnock.Controllers
             return result;
         }
 
-        //#endregion
+        #endregion
     }
 }
 

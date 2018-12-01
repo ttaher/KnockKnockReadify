@@ -18,7 +18,6 @@ namespace KnockKnock.Controllers.Tests
             Assert.AreEqual(12586269025, controller.Get(50).Result);
             Assert.AreEqual(86267571272, controller.Get(54).Result);
             Assert.AreEqual(139583862445, controller.Get(55).Result);
-
             Assert.AreEqual(-3, controller.Get(-4).Result);
             Assert.AreEqual(2, controller.Get(-3).Result);
             Assert.AreEqual(-1, controller.Get(-2).Result);
@@ -37,17 +36,12 @@ namespace KnockKnock.Controllers.Tests
             Assert.AreEqual(13, controller.Get(-7).Result);
             Assert.AreEqual(-8, controller.Get(-6).Result);
             Assert.AreEqual(-1836311903, controller.Get(-46).Result);
-            //Assert.AreEqual(-7540113804746346000, controller.Get(-92).Result);
-            //Assert.AreEqual(7540113804746346000, controller.Get(92).Result);
-            //Assert.AreEqual("no content", controller.Get(-93).Result);
-            //Assert.AreEqual("no content", controller.Get(93).Result);
-            //Assert.AreEqual("no content", controller.Get(-9223372036854775808).Result);
+
         }
         [TestMethod()]
         public void TokenTest()
         {
             ValuesController controller = new ValuesController();
-
             Assert.AreEqual("26d91d08-63b7-4171-a74c-90d9f9b648d5", controller.Get());
         }
         [TestMethod()]
