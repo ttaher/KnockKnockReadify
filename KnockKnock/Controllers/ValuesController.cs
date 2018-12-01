@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace KnockKnock.Controllers
@@ -25,10 +26,18 @@ namespace KnockKnock.Controllers
             //}
         }
         [Route("Fibonacci")]
-        public long Get(long n)
+        public async Task<long> Get(long n)
         {
-            long result = FibonacciCalc(n);
+            if (n == 0)
+                return 0;
+            if (n == -1 || n == 1 || n == 2)
+                return 1;
+            if (n == -2)
+                return -1;
+            long result = await FibonacciCalc(n);
+
             return result;
+
         }
         [Route("TriangleType")]
         public string Get(int a, int b, int c)
@@ -43,22 +52,21 @@ namespace KnockKnock.Controllers
             string result = ReverseWordsCalc(sentence);
             return result;
         }
-        public long FibonacciCalc(long n)
+        public Task<long> FibonacciCalc(long n)
         {
-            long result = 0;
+            if (n >= 92 || n < -92)
+            {
+
+            }
             try
             {
-                if (n == 0)
-                    return 0;
-                if (n == -1 || n == 1 || n == 2)
-                    return 1;
-                if (n == -2)
-                    return -1;
-                double numerator = Math.Pow((1.0 + Math.Sqrt(5.0)), n) - Math.Pow((1.0 - Math.Sqrt(5.0)), n);
+
+                double numerator = Math.Pow((1 + Math.Sqrt(5)), n) - Math.Pow((1 - Math.Sqrt(5)), n);
                 double denominator = Math.Pow(2.0, n) * Math.Sqrt(5.0);
                 double tempresult = numerator / denominator;
                 double roundedResult = Math.Round(tempresult);
-                result = (long)roundedResult;
+                double result = roundedResult;
+                return Task.FromResult((long)result);
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -68,7 +76,7 @@ namespace KnockKnock.Controllers
             {
                 throw;
             }
-            return result;
+
         }
         public string TokenCalc()
         {
@@ -76,7 +84,7 @@ namespace KnockKnock.Controllers
         }
         public string ReverseWordsCalc(string s)
         {
-            if (s.Trim() == "")
+            if (string.IsNullOrEmpty(s) || s.Trim() == "")
             {
                 return "";
             }
@@ -85,6 +93,10 @@ namespace KnockKnock.Controllers
             {
                 char[] charArray = words[i].ToCharArray();
                 Array.Reverse(charArray);
+                if (charArray.Length==1&& charArray[0].ToString()=="")
+                {
+                    charArray[0] = ' ';
+                }
                 words[i] = new string(charArray);
             }
             return string.Join(" ", words);
@@ -99,7 +111,7 @@ namespace KnockKnock.Controllers
                     result = "Error";
                     return result;
                 }
-                if (!(a + b > c && b + c > a && a + c > b))
+                if (!((long)a + (long)b > (long)c && (long)b + (long)c > (long)a && (long)a + (long)c > (long)b))
                 {
                     result = "Error";
                     return result;
@@ -124,11 +136,10 @@ namespace KnockKnock.Controllers
             {
                 throw;
             }
-
-
             return result;
         }
 
         //#endregion
     }
 }
+
